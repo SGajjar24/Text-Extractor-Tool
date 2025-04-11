@@ -1,0 +1,15 @@
+Customer Name: John Smith
+Order ID: ORD12345
+Date: 2025-04-01
+Items:
+- Laptop Computer ($1299.99)
+- Wireless Mouse ($49.99)
+- HDMI Cable ($19.99)
+Total Amount: $1369.97
+
+Shipping Address:
+123 Main Street
+Anytown, CA 12345
+
+Payment Method: Credit Card
+Status: Shipped

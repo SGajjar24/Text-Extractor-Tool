@@ -1,0 +1,70 @@
+# Sample configuration file for Text Extractor
+
+# Input configuration
+input:
+  # Patterns to extract data from text files
+  text_patterns:
+    - name: "customer_name"
+      pattern: "Customer Name: (.*)"
+      group: 1
+    - name: "order_id"
+      pattern: "Order ID: ([A-Z0-9]+)"
+      group: 1
+    - name: "total_amount"
+      pattern: "Total Amount: \\$(\\d+\\.\\d{2})"
+      group: 1
+      type: "float"
+  
+  # Column mappings for Excel/CSV files
+  excel_mappings:
+    - source_column: "Customer"
+      target_field: "customer_name"
+    - source_column: "Order Number"
+      target_field: "order_id"
+    - source_column: "Amount"
+      target_field: "total_amount"
+      type: "float"
+  
+  # Word document extraction settings
+  word_extraction:
+    - name: "customer_name"
+      paragraph_contains: "Customer:"
+      extract_after: "Customer:"
+    - name: "order_id"
+      paragraph_contains: "Order ID:"
+      extract_after: "Order ID:"
+    - name: "total_amount"
+      paragraph_contains: "Total:"
+      extract_after: "Total:"
+      type: "float"
+
+# Output structure configuration
+output:
+  structure:
+    - field: "customer_name"
+      display_name: "Customer Name"
+      required: true
+    - field: "order_id"
+      display_name: "Order ID"
+      required: true
+    - field: "total_amount"
+      display_name: "Total Amount"
+      format: "${:.2f}"
+      required: true
+
+# Export configuration
+export:
+  excel:
+    sheet_name: "Extracted Data"
+    include_header: true
+    style:
+      header_color: "#CCCCCC"
+  
+  word:
+    title: "Extracted Data Report"
+    include_table: true
+    include_summary: true
+  
+  text:
+    delimiter: "|"
+    include_header: true
